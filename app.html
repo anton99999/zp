@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        html, body{
+            font-family: sans-serif;
+            margin: 0;
+            min-height: 100%;
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0;
+        }
+
+        .head{
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            background: #111;
+            border-bottom: 1px #fff solid;
+        }
+
+        .head p{
+            color: #fff;
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 24px;
+            line-height: 28px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+        .content{
+            display: flex;
+            background: #111;
+            overflow-y: scroll;
+            flex-direction: column;
+            padding-left: 20px;
+            flex: 1 1 auto;
+        }
+
+        
+
+        .content p{
+            width: 130px;
+            padding: 7px 0px;
+            text-align: center;
+            border-radius: 20px;
+            background: #fff;
+            color: #111;
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+            font-feature-settings: 'pnum' on, 'lnum' on;
+            margin: 10px;
+        }
+
+        .foot{
+            height: 150px;
+            border-top: 1px #fff solid;
+            display: flex;
+            background: #111;
+            flex-direction: column;
+            padding: 20px;
+            
+        }
+
+        .foot div{
+            display: flex;
+            flex-direction: row;
+
+        }
+
+        .foot p{
+            text-transform: uppercase;
+            color: #fff;
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 20px;
+            font-feature-settings: 'pnum' on, 'lnum' on;
+
+        }
+
+        .inp{
+            width: 100%;
+            height: 30px;
+            background: #FFFFFF;
+            border-radius: 20px;
+            border: none;
+            padding-left: 20px;
+        }
+
+        .btn{
+            width: 60px;
+            height: 35px;
+            background: #FFFFFF;
+            border-radius: 20px;
+            border: none;
+            text-transform: uppercase;
+            color: #111;
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 20px;
+            font-feature-settings: 'pnum' on, 'lnum' on;
+            margin-left: 20px;
+            
+        }
+
+        .grad{
+            position: relative;
+            top: 1px;
+            left: 0px;
+            width: 100%;
+            height: 100px;
+
+            background: linear-gradient(180deg, #111111 0%, rgba(17, 17, 17, 0) 100%);
+        }
+    </style>
+    <title>ZARPLATA</title>
+</head>
+<body>
+    <div class="head">
+        <p>ZARPLATA</p>
+    </div>
+
+    <div class="content">
+        <div class="grad"></div>
+        <div id="t"></div> 
+    </div>
+
+    <div class="foot">
+        <div>
+            <input class="inp" value="" id="text" placeholder="ВВЕДИ ЧИСЛО...">
+            <input class="btn" type="button" value="OK" onclick="func()">
+        </div>
+        <p id="zp"> За month: </p>
+    </div>
+    
+    <script>
+
+        num        = localStorage.getItem('num')
+        hhh        = 1
+        check      = setInterval(fff, 1)
+        date       = new Date
+        day        = date.getDate()
+        month      = date.getMonth()
+        year       = date.getFullYear()
+        outputDate = String(day) + '.' + String(month + 1)  + '.' + String(year) 
+        monthNames = ["січень", "лютий", "березень", "квітень", "травень", "червень", "липень", "серпень", "вересень", "жовтень", "листопад", "грудень" ];
+        arr        = []
+
+
+
+        if (num == null){
+            localStorage.setItem('num', 1)
+        }
+
+        function func(){
+            text = $('#text')
+            t    = $('#t')
+            num = localStorage.getItem('num')
+            localStorage.setItem('date' + num, outputDate)
+            localStorage.setItem('text' + num, text.val())
+            t.before('<p>' + localStorage.getItem('date' + num) + ' - ' + localStorage.getItem('text' + num) + '</p>')
+            arr.push(Number(localStorage.getItem('text' + num)))
+            text.val('')
+
+            num++
+
+            localStorage.setItem('num', num)
+            $('#zp').text('За ' + monthNames[month] + ': ' + arr.reduce((acc, rec) => acc + rec))
+        }
+
+        function fff(){
+            text = $('#text')
+            t    = $('#t')
+            t.before('<p>' + localStorage.getItem('date' + hhh) + ' - ' + localStorage.getItem('text' + hhh) + '</p>')
+            arr.push(Number(localStorage.getItem('text' + hhh)))
+            $('#zp').text('За ' + monthNames[month] + ': ' + arr.reduce((acc, rec) => acc + rec) + ' грн')
+
+            hhh++
+
+            if(hhh >= (localStorage.length / 2)){
+                clearInterval(check)
+            }
+        }
+
+    </script>
+</body>
+</html>
