@@ -1,243 +1,244 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        html, body{
-            font-family: sans-serif;
-            margin: 0;
-            min-height: 100%;
-            display: flex;
-            height: 100%;
-            flex-direction: column;
-        }
+    <html>
 
-        ::-webkit-scrollbar {
-            width: 0;
-        }
+    <head>
+        <title>ZARPLATA</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            html, body{
+                font-family: sans-serif;
+                margin: 0;
+                min-height: 100%;
+                display: flex;
+                height: 100%;
+                flex-direction: column;
+            }
 
-        .head{
-            height: 100px;
-            display: flex;
-            justify-content: center;
-            background: #111;
-            border-bottom: 1px #fff solid;
-        }
+            ::-webkit-scrollbar {
+                width: 0;
+            }
 
-        .head p{
-            color: #fff;
-            font-family: Raleway;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 24px;
-            line-height: 28px;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            user-select: none;
-        }
-        .content{
-            display: flex;
-            background: #111;
-            overflow-y: scroll;
-            flex-direction: column;
-            padding-bottom: 10px;
-            flex: 1 1 auto;
-        }
+            .head{
+                height: 100px;
+                display: flex;
+                justify-content: center;
+                background: #111;
+                border-bottom: 1px #fff solid;
+            }
 
-        .content p{
-            width: 130px;
-            padding: 7px 0px;
-            text-align: center;
-            border-radius: 20px;
-            background: #fff;
-            color: #111;
-            font-family: Raleway;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 14px;
-            line-height: 16px;
-            font-feature-settings: 'pnum' on, 'lnum' on;
-            margin: 10px;
-        }
+            .head p{
+                color: #fff;
+                font-family: Raleway;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 24px;
+                line-height: 28px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                user-select: none;
+            }
+            .content{
+                display: flex;
+                background: #111;
+                overflow-y: scroll;
+                flex-direction: column;
+                padding-bottom: 10px;
+                flex: 1 1 auto;
+            }
 
-        .foot{
-            height: 150px;
-            border-top: 1px #fff solid;
-            display: flex;
-            background: #111;
-            flex-direction: column;
-            padding: 20px;
+            .content p{
+                width: 130px;
+                padding: 7px 0px;
+                text-align: center;
+                border-radius: 20px;
+                background: #fff;
+                color: #111;
+                font-family: Raleway;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 16px;
+                font-feature-settings: 'pnum' on, 'lnum' on;
+                margin: 10px;
+            }
+
+            .foot{
+                height: 150px;
+                border-top: 1px #fff solid;
+                display: flex;
+                background: #111;
+                flex-direction: column;
+                padding: 20px;
+                
+            }
+
+            .foot div{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                height: 30px;
+            }
+
+            .foot p{
+                text-transform: uppercase;
+                color: #fff;
+                font-family: Raleway;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 18px;
+                line-height: 20px;
+                font-feature-settings: 'pnum' on, 'lnum' on;
+
+            }
+
+            .inp{
+                width: 100%;
+                height: 100%;
+                background: #FFFFFF;
+                border-radius: 20px;
+                border: none;
+                padding-left: 20px;
+            }
             
-        }
+            .btn{
+                width: 60px;
+                height: 32px;
+                background: #FFFFFF;
+                border-radius: 20px;
+                border: none;
+                text-transform: uppercase;
+                color: #111;
+                font-family: Raleway;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 20px;
+                font-feature-settings: 'pnum' on, 'lnum' on;
+                margin-left: 20px;
+                
+            }
 
-        .foot div{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            height: 30px;
-        }
+            .grad{
+                position: fixed;
+                width: 100%;
+                height: 100px;
+                pointer-events: none;
+                background: linear-gradient(180deg, #111111 0%, rgba(17, 17, 17, 0) 100%);
+            }
 
-        .foot p{
-            text-transform: uppercase;
-            color: #fff;
-            font-family: Raleway;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 18px;
-            line-height: 20px;
-            font-feature-settings: 'pnum' on, 'lnum' on;
+            #remove{
+                width: 16px;
+                height: 16px;
+                border-radius: 20px;
+                background: #fff;
+                padding: 7px;
+                margin: auto 0;
+            }
 
-        }
+            .str{
+                display: flex;
+                flex-direction: row;
+                margin-left: 20px;
+            }
 
-        .inp{
-            width: 100%;
-            height: 100%;
-            background: #FFFFFF;
-            border-radius: 20px;
-            border: none;
-            padding-left: 20px;
-        }
-        
-        .btn{
-            width: 60px;
-            height: 32px;
-            background: #FFFFFF;
-            border-radius: 20px;
-            border: none;
-            text-transform: uppercase;
-            color: #111;
-            font-family: Raleway;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 14px;
-            line-height: 20px;
-            font-feature-settings: 'pnum' on, 'lnum' on;
-            margin-left: 20px;
-            
-        }
+            .sums{
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                height: 100%;
+            }
 
-        .grad{
-            position: fixed;
-            width: 100%;
-            height: 100px;
-            pointer-events: none;
-            background: linear-gradient(180deg, #111111 0%, rgba(17, 17, 17, 0) 100%);
-        }
+        </style>
+    </head>
 
-        #remove{
-            width: 16px;
-            height: 16px;
-            border-radius: 20px;
-            background: #fff;
-            padding: 7px;
-            margin: auto 0;
-        }
-
-        .str{
-            display: flex;
-            flex-direction: row;
-            margin-left: 20px;
-        }
-
-        .sums{
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            height: 100%;
-        }
-
-    </style>
-    <title>ZARPLATA</title>
-</head>
-<body>
-    <div class="head">
-        <p onclick="clearAll()">ZARPLATA</p>
-    </div>
-
-    <div class="content">
-        <div class="grad"></div>
-        <div class="sums"></div>
-    </div>
-
-    <div class="foot">
-        <div>
-            <input class="inp" type="number" value=""   placeholder="ВВЕДИ ЧИСЛО..." id="text">
-            <input class="btn" type="button" value="OK" onclick="addElem()">
+    <body>
+        <div class="head">
+            <p onclick="clearAll()">ZARPLATA</p>
         </div>
-        <p id="zp"> За month: </p>
-    </div>
 
-    
-    
-    <script>
+        <div class="content">
+            <div class="grad"></div>
+            <div class="sums"></div>
+        </div>
 
-        num        = localStorage.getItem('num')
-        i          = 1
-        check      = setInterval(makeElem, 1)
-        date       = new Date
-        day        = date.getDate()
-        month      = date.getMonth()
-        year       = date.getFullYear()
-        outputDate = String(day) + '.' + String(month + 1)  + '.' + String(year) 
-        monthNames = ["січень", "лютий", "березень", "квітень", "травень", "червень", "липень", "серпень", "вересень", "жовтень", "листопад", "грудень" ];
-        arr        = []
+        <div class="foot">
+            <div>
+                <input class="inp" type="number" value=""   placeholder="ВВЕДИ ЧИСЛО..." id="text">
+                <input class="btn" type="button" value="OK" onclick="addElem()">
+            </div>
+            <p id="zp"> За month: </p>
+        </div>
+
+        <script>
+
+            num        = localStorage.getItem('num')
+            i          = 1
+            check      = setInterval(makeElem, 1)
+            date       = new Date
+            day        = date.getDate()
+            month      = date.getMonth()
+            year       = date.getFullYear()
+            outputDate = String(day) + '.' + String(month + 1)  + '.' + String(year) 
+            monthNames = ["січень", "лютий", "березень", "квітень", "травень", "червень", "липень", "серпень", "вересень", "жовтень", "листопад", "грудень" ];
+            arr        = []
 
 
 
-        if (num == null){
-            localStorage.setItem('num', 1)
-        }
-
-        function addElem(){
-            num  = localStorage.getItem('num')
-            localStorage.setItem('date' + num, outputDate)
-            localStorage.setItem('text' + num, $('#text').val())
-             $('.sums').append(
-                '<div class="str" id="div' + num + '">' + 
-                    '<p>' + localStorage.getItem('date' + num) + ' - ' + localStorage.getItem('text' + num) + '</p>' + 
-                    '<img src="trash.png" alt="remove" onclick="remove(' + num + ')" value="text' + num + '" id="remove">' +
-                '</div>'
-            )
-            arr.push(Number(localStorage.getItem('text' + num)))
-            $('#text').val('')
-            num++
-            localStorage.setItem('num', num)
-            $('#zp').text('За ' + monthNames[month] + ': ' + arr.reduce((acc, rec) => acc + rec)  + ' грн')
-        }
-
-        function makeElem(){
-            $('.sums').append(
-                '<div class="str" id="div' + i + '">' + 
-                    '<p>' + localStorage.getItem('date' + i) + ' - ' + localStorage.getItem('text' + i) + '</p>' + 
-                    '<img src="trash.png" alt="remove" onclick="remove(' + i + ')" value="text' + i + '" id="remove">' +
-                '</div>')
-            arr.push(Number(localStorage.getItem('text' + i)))
-            i++
-            $('#zp').text('За ' + monthNames[month] + ': ' + arr.reduce((acc, rec) => acc + rec) + ' грн')
-
-            if(i >= (localStorage.length / 2)){
-                clearInterval(check)
+            if (num == null){
+                localStorage.setItem('num', 1)
             }
-        }
 
-        function remove(index){
-            localStorage.removeItem('text' + index)
-            localStorage.removeItem('date' + index)
-            $('#div' + index).hide(1000);
-            num = localStorage.getItem('num')
-            if(num > 1){
-                num--
+            function addElem(){
+                num  = localStorage.getItem('num')
+                localStorage.setItem('date' + num, outputDate)
+                localStorage.setItem('text' + num, $('#text').val())
+                $('.sums').append(
+                    '<div class="str" id="div' + num + '">' + 
+                        '<p>' + localStorage.getItem('date' + num) + ' - ' + localStorage.getItem('text' + num) + '</p>' + 
+                        '<img src="trash.png" alt="remove" onclick="remove(' + num + ')" value="text' + num + '" id="remove">' +
+                    '</div>'
+                )
+                arr.push(Number(localStorage.getItem('text' + num)))
+                $('#text').val('')
+                num++
                 localStorage.setItem('num', num)
+                $('#zp').text('За ' + monthNames[month] + ': ' + arr.reduce((acc, rec) => acc + rec)  + ' грн')
             }
-        }
 
-        function clearAll(){
-            localStorage.clear()
-        }
+            function makeElem(){
+                $('.sums').append(
+                    '<div class="str" id="div' + i + '">' + 
+                        '<p>' + localStorage.getItem('date' + i) + ' - ' + localStorage.getItem('text' + i) + '</p>' + 
+                        '<img src="trash.png" alt="remove" onclick="remove(' + i + ')" value="text' + i + '" id="remove">' +
+                    '</div>')
+                arr.push(Number(localStorage.getItem('text' + i)))
+                i++
+                $('#zp').text('За ' + monthNames[month] + ': ' + arr.reduce((acc, rec) => acc + rec) + ' грн')
 
-    </script>
-</body>
+                if(i >= (localStorage.length / 2)){
+                    clearInterval(check)
+                }
+            }
+
+            function remove(index){
+                localStorage.removeItem('text' + index)
+                localStorage.removeItem('date' + index)
+                $('#div' + index).hide(1000);
+                num = localStorage.getItem('num')
+                if(num > 1){
+                    num--
+                    localStorage.setItem('num', num)
+                }
+            }
+
+            function clearAll(){
+                localStorage.clear()
+            }
+
+        </script>
+
+    </body>
 </html>
