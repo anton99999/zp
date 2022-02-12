@@ -50,22 +50,6 @@
                 flex: 1 1 auto;
             }
 
-            .content p{
-                width: 130px;
-                padding: 7px 0px;
-                text-align: center;
-                border-radius: 20px;
-                background: #fff;
-                color: #111;
-                font-family: Raleway;
-                font-style: normal;
-                font-weight: normal;
-                font-size: 14px;
-                line-height: 16px;
-                font-feature-settings: 'pnum' on, 'lnum' on;
-                margin: 10px;
-            }
-
             .foot{
                 height: 150px;
                 border-top: 1px #fff solid;
@@ -130,7 +114,13 @@
                 background: linear-gradient(180deg, #111111 0%, rgba(17, 17, 17, 0) 100%);
             }
 
-            #remove{
+            .str{
+                display: flex;
+                flex-direction: row;
+                margin-left: 20px;
+            }
+            
+            .str img{
                 width: 16px;
                 height: 16px;
                 border-radius: 20px;
@@ -139,10 +129,20 @@
                 margin: auto 0;
             }
 
-            .str{
-                display: flex;
-                flex-direction: row;
-                margin-left: 20px;
+            .str p{
+                width: 130px;
+                padding: 7px 0px;
+                text-align: center;
+                border-radius: 20px;
+                background: #fff;
+                color: #111;
+                font-family: Raleway;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 16px;
+                font-feature-settings: 'pnum' on, 'lnum' on;
+                margin: 10px;
             }
 
             .sums{
@@ -157,7 +157,7 @@
 
     <body>
         <div class="head">
-            <p onclick="clearAll()">ZARPLATA</p>
+            <p>ZARPLATA</p>
         </div>
 
         <div class="content">
@@ -170,73 +170,69 @@
                 <input class="inp" type="number" value=""   placeholder="ВВЕДИ ЧИСЛО..." id="text">
                 <input class="btn" type="button" value="OK" onclick="addElem()">
             </div>
-            <p id="zp"> За month: </p>
+            <p id="zp"></p>
         </div>
 
         <script>
 
-            num        = localStorage.getItem('num')
-            i          = 1
-            check      = setInterval(makeElem, 1)
-            date       = new Date
-            day        = date.getDate()
-            month      = date.getMonth()
-            year       = date.getFullYear()
-            outputDate = String(day) + '.' + String(month + 1)  + '.' + String(year) 
-            monthNames = ["січень", "лютий", "березень", "квітень", "травень", "червень", "липень", "серпень", "вересень", "жовтень", "листопад", "грудень" ];
-            arr        = []
-
-
-
+            let num        = localStorage.getItem('num')
+            let date       = new Date
+            let day        = date.getDate()
+            let month      = date.getMonth()
+            let year       = date.getFullYear()
+            let outputDate = String(day) + '.' + String(month + 1)  + '.' + String(year) 
+            let monthNames = ["січень", "лютий", "березень", "квітень", "травень", "червень", "липень", "серпень", "вересень", "жовтень", "листопад", "грудень" ];
+            let total      = 0
+           
             if (num == null){
                 localStorage.setItem('num', 1)
+                localStorage.setItem('total', 0)
             }
+
+            code  = localStorage.getItem('code')
+            total = localStorage.getItem('total')
+
+            $('.sums').append(code)
+            $('#zp').text('За ' + monthNames[month] + ': ' + total + ' грн')
+
 
             function addElem(){
-                num  = localStorage.getItem('num')
-                localStorage.setItem('date' + num, outputDate)
-                localStorage.setItem('text' + num, $('#text').val())
+                num   = localStorage.getItem('num')
+                total = localStorage.getItem('total')
+                suma  = $('#text').val()
+                
                 $('.sums').append(
-                    '<div class="str" id="div' + num + '">' + 
-                        '<p>' + localStorage.getItem('date' + num) + ' - ' + localStorage.getItem('text' + num) + '</p>' + 
-                        '<img src="trash.png" alt="remove" onclick="remove(' + num + ')" value="text' + num + '" id="remove">' +
+                    '<div class="str" id="div' + num + '">'+ 
+                        '<p value="' + suma + '">' + outputDate + ' - ' + suma + '</p>'+ 
+                        '<img src="trash.png" onclick="remove(' + num + ')">'+
                     '</div>'
-                )
-                arr.push(Number(localStorage.getItem('text' + num)))
+                ) 
                 $('#text').val('')
+
+                total = Number(total) + Number($('#div' + num + ' p').attr('value'))
+                $('#zp').text('За ' + monthNames[month] + ': ' + total + ' грн')
+
                 num++
-                localStorage.setItem('num', num)
-                $('#zp').text('За ' + monthNames[month] + ': ' + arr.reduce((acc, rec) => acc + rec)  + ' грн')
-            }
-
-            function makeElem(){
-                $('.sums').append(
-                    '<div class="str" id="div' + i + '">' + 
-                        '<p>' + localStorage.getItem('date' + i) + ' - ' + localStorage.getItem('text' + i) + '</p>' + 
-                        '<img src="trash.png" alt="remove" onclick="remove(' + i + ')" value="text' + i + '" id="remove">' +
-                    '</div>')
-                arr.push(Number(localStorage.getItem('text' + i)))
-                i++
-                $('#zp').text('За ' + monthNames[month] + ': ' + arr.reduce((acc, rec) => acc + rec) + ' грн')
-
-                if(i >= (localStorage.length / 2)){
-                    clearInterval(check)
-                }
+                
+                localStorage.setItem('num',  num)
+                localStorage.setItem('code', $('.sums').html())
+                localStorage.setItem('total',  total)
             }
 
             function remove(index){
-                localStorage.removeItem('text' + index)
-                localStorage.removeItem('date' + index)
-                $('#div' + index).hide(1000);
-                num = localStorage.getItem('num')
-                if(num > 1){
-                    num--
-                    localStorage.setItem('num', num)
-                }
-            }
+       
+                $('#div' + index).hide(1000)
 
-            function clearAll(){
-                localStorage.clear()
+                setTimeout(function() { 
+                    $('#div' + index).remove() 
+                    localStorage.setItem('code', $('.sums').html())
+                }, 1000)
+
+                total = Number(total) - Number($('#div' + index + ' p').attr('value'))
+
+                $('#zp').text('За ' + monthNames[month] + ': ' + total + ' грн')
+
+                localStorage.setItem('total', total)                
             }
 
         </script>
