@@ -198,7 +198,7 @@
                 code  = localStorage.getItem('code')
                 total = localStorage.getItem('total')
 
-                $('.sums').after(code)
+                $('.after').after(code)
                 $('#zp').text('За ' + monthNames[month] + ': ' + total + ' грн')
             }
             
@@ -207,7 +207,7 @@
                 total = localStorage.getItem('total')
                 suma  = $('#text').val()
                 
-                $('.sums').append(
+                $('.after').after(
                     '<div class="str" id="div' + num + '">'+ 
                         '<p value="' + suma + '">' + outputDate + ' - ' + suma + '</p>'+ 
                         '<img src="trash.png" onclick="remove(' + num + ')">'+
