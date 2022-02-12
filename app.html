@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
@@ -193,39 +192,31 @@
         }
 
         function addElem(){
-            text = $('#text')
-            sums = $('.sums')
             num  = localStorage.getItem('num')
             localStorage.setItem('date' + num, outputDate)
-            localStorage.setItem('text' + num, text.val())
-            sums.append(
+            localStorage.setItem('text' + num, $('#text').val())
+             $('.sums').append(
                 '<div class="str" id="div' + num + '">' + 
                     '<p>' + localStorage.getItem('date' + num) + ' - ' + localStorage.getItem('text' + num) + '</p>' + 
                     '<img src="trash.png" alt="remove" onclick="remove(' + num + ')" value="text' + num + '" id="remove">' +
                 '</div>'
             )
             arr.push(Number(localStorage.getItem('text' + num)))
-            text.val('')
-
+            $('#text').val('')
             num++
-
             localStorage.setItem('num', num)
             $('#zp').text('За ' + monthNames[month] + ': ' + arr.reduce((acc, rec) => acc + rec)  + ' грн')
         }
 
         function makeElem(){
-            text = $('#text')
-            sums = $('.sums')
-            sums.append(
+            $('.sums').append(
                 '<div class="str" id="div' + i + '">' + 
                     '<p>' + localStorage.getItem('date' + i) + ' - ' + localStorage.getItem('text' + i) + '</p>' + 
                     '<img src="trash.png" alt="remove" onclick="remove(' + i + ')" value="text' + i + '" id="remove">' +
-                '</div>'
-            )
+                '</div>')
             arr.push(Number(localStorage.getItem('text' + i)))
-            $('#zp').text('За ' + monthNames[month] + ': ' + arr.reduce((acc, rec) => acc + rec) + ' грн')
-
             i++
+            $('#zp').text('За ' + monthNames[month] + ': ' + arr.reduce((acc, rec) => acc + rec) + ' грн')
 
             if(i >= (localStorage.length / 2)){
                 clearInterval(check)
