@@ -46,6 +46,7 @@
             padding-left: 20px;
             padding-bottom: 10px;
             flex: 1 1 auto;
+            /* justify-content:flex-end; */
         }
 
         
@@ -125,9 +126,24 @@
             position: fixed;
             width: 100%;
             height: 100px;
-
+            pointer-events: none;
             background: linear-gradient(180deg, #111111 0%, rgba(17, 17, 17, 0) 100%);
         }
+
+        #remove{
+            width: 16px;
+            height: 16px;
+            border-radius: 20px;
+            background: #fff;
+            padding: 7px;
+            margin: auto 0;
+        }
+
+        .str{
+            display: flex;
+            flex-direction: row;
+        }
+
     </style>
     <title>ZARPLATA</title>
 </head>
@@ -139,6 +155,7 @@
     <div class="content">
         <div class="grad"></div>
         <div id="t"></div> 
+        
     </div>
 
     <div class="foot">
@@ -149,7 +166,7 @@
         <p id="zp"> За month: </p>
     </div>
 
-    <img src="trash.png" alt="remove">
+    
     
     <script>
 
@@ -163,8 +180,9 @@
         outputDate = String(day) + '.' + String(month + 1)  + '.' + String(year) 
         monthNames = ["січень", "лютий", "березень", "квітень", "травень", "червень", "липень", "серпень", "вересень", "жовтень", "листопад", "грудень" ];
         arr        = []
-
-
+        
+        $('#remove').attr('value', 200)
+        console.log($('#remove').attr('value'))
 
         if (num == null){
             localStorage.setItem('num', 1)
@@ -176,7 +194,12 @@
             num = localStorage.getItem('num')
             localStorage.setItem('date' + num, outputDate)
             localStorage.setItem('text' + num, text.val())
-            t.before('<p>' + localStorage.getItem('date' + num) + ' - ' + localStorage.getItem('text' + num) + '</p>')
+            t.before(
+                '<div class="str" id="div' + num + '">' + 
+                    '<p>' + localStorage.getItem('date' + num) + ' - ' + localStorage.getItem('text' + num) + '</p>' + 
+                    '<img src="trash.png" alt="remove" onclick="remove(' + num + ')" value="text' + num + '" id="remove">' +
+                '</div>'
+            )
             arr.push(Number(localStorage.getItem('text' + num)))
             text.val('')
 
@@ -189,7 +212,12 @@
         function fff(){
             text = $('#text')
             t    = $('#t')
-            t.before('<p>' + localStorage.getItem('date' + hhh) + ' - ' + localStorage.getItem('text' + hhh) + '</p>')
+            t.before(
+                '<div class="str" id="div' + hhh + '">' + 
+                    '<p>' + localStorage.getItem('date' + hhh) + ' - ' + localStorage.getItem('text' + hhh) + '</p>' + 
+                    '<img src="trash.png" alt="remove" onclick="remove(' + hhh + ')" value="text' + hhh + '" id="remove">' +
+                '</div>'
+            )
             arr.push(Number(localStorage.getItem('text' + hhh)))
             $('#zp').text('За ' + monthNames[month] + ': ' + arr.reduce((acc, rec) => acc + rec) + ' грн')
 
@@ -197,6 +225,17 @@
 
             if(hhh >= (localStorage.length / 2)){
                 clearInterval(check)
+            }
+        }
+
+        function remove(index){
+            localStorage.removeItem('text' + index)
+            localStorage.removeItem('date' + index)
+            $('#div' + index).hide(1000);
+            num = localStorage.getItem('num')
+            if(num > 1){
+                num--
+                localStorage.setItem('num', num)
             }
         }
 
