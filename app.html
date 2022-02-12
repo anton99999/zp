@@ -44,13 +44,9 @@
             background: #111;
             overflow-y: scroll;
             flex-direction: column;
-            padding-left: 20px;
             padding-bottom: 10px;
             flex: 1 1 auto;
-            /* justify-content:flex-end; */
         }
-
-        
 
         .content p{
             width: 130px;
@@ -81,7 +77,8 @@
         .foot div{
             display: flex;
             flex-direction: row;
-
+            justify-content: center;
+            height: 30px;
         }
 
         .foot p{
@@ -98,7 +95,7 @@
 
         .inp{
             width: 100%;
-            height: 30px;
+            height: 100%;
             background: #FFFFFF;
             border-radius: 20px;
             border: none;
@@ -107,7 +104,7 @@
         
         .btn{
             width: 60px;
-            height: 35px;
+            height: 32px;
             background: #FFFFFF;
             border-radius: 20px;
             border: none;
@@ -143,6 +140,7 @@
         .str{
             display: flex;
             flex-direction: row;
+            margin-left: 20px;
         }
 
         .sums{
@@ -167,8 +165,8 @@
 
     <div class="foot">
         <div>
-            <input class="inp" value="" id="text" placeholder="ВВЕДИ ЧИСЛО...">
-            <input class="btn" type="button" value="OK" onclick="func()">
+            <input class="inp" type="number" value=""   placeholder="ВВЕДИ ЧИСЛО..." id="text">
+            <input class="btn" type="button" value="OK" onclick="addElem()">
         </div>
         <p id="zp"> За month: </p>
     </div>
@@ -178,8 +176,8 @@
     <script>
 
         num        = localStorage.getItem('num')
-        hhh        = 1
-        check      = setInterval(fff, 1)
+        i          = 1
+        check      = setInterval(makeElem, 1)
         date       = new Date
         day        = date.getDate()
         month      = date.getMonth()
@@ -187,15 +185,14 @@
         outputDate = String(day) + '.' + String(month + 1)  + '.' + String(year) 
         monthNames = ["січень", "лютий", "березень", "квітень", "травень", "червень", "липень", "серпень", "вересень", "жовтень", "листопад", "грудень" ];
         arr        = []
-        
-        $('#remove').attr('value', 200)
-        console.log($('#remove').attr('value'))
+
+
 
         if (num == null){
             localStorage.setItem('num', 1)
         }
 
-        function func(){
+        function addElem(){
             text = $('#text')
             sums = $('.sums')
             num  = localStorage.getItem('num')
@@ -216,16 +213,16 @@
             $('#zp').text('За ' + monthNames[month] + ': ' + arr.reduce((acc, rec) => acc + rec)  + ' грн')
         }
 
-        function fff(){
+        function makeElem(){
             text = $('#text')
             sums = $('.sums')
             sums.append(
-                '<div class="str" id="div' + hhh + '">' + 
-                    '<p>' + localStorage.getItem('date' + hhh) + ' - ' + localStorage.getItem('text' + hhh) + '</p>' + 
-                    '<img src="trash.png" alt="remove" onclick="remove(' + hhh + ')" value="text' + hhh + '" id="remove">' +
+                '<div class="str" id="div' + i + '">' + 
+                    '<p>' + localStorage.getItem('date' + i) + ' - ' + localStorage.getItem('text' + i) + '</p>' + 
+                    '<img src="trash.png" alt="remove" onclick="remove(' + i + ')" value="text' + i + '" id="remove">' +
                 '</div>'
             )
-            arr.push(Number(localStorage.getItem('text' + hhh)))
+            arr.push(Number(localStorage.getItem('text' + i)))
             $('#zp').text('За ' + monthNames[month] + ': ' + arr.reduce((acc, rec) => acc + rec) + ' грн')
 
             hhh++
