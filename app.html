@@ -149,6 +149,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
+            height: 100%;
         }
 
     </style>
@@ -161,10 +162,7 @@
 
     <div class="content">
         <div class="grad"></div>
-        <div class="sums">
-            <div id="t"></div> 
-        </div>
-        
+        <div class="sums"></div>
     </div>
 
     <div class="foot">
@@ -199,11 +197,11 @@
 
         function func(){
             text = $('#text')
-            t    = $('#t')
-            num = localStorage.getItem('num')
+            sums = $('.sums')
+            num  = localStorage.getItem('num')
             localStorage.setItem('date' + num, outputDate)
             localStorage.setItem('text' + num, text.val())
-            t.before(
+            sums.append(
                 '<div class="str" id="div' + num + '">' + 
                     '<p>' + localStorage.getItem('date' + num) + ' - ' + localStorage.getItem('text' + num) + '</p>' + 
                     '<img src="trash.png" alt="remove" onclick="remove(' + num + ')" value="text' + num + '" id="remove">' +
@@ -220,8 +218,8 @@
 
         function fff(){
             text = $('#text')
-            t    = $('#t')
-            t.before(
+            sums = $('.sums')
+            sums.append(
                 '<div class="str" id="div' + hhh + '">' + 
                     '<p>' + localStorage.getItem('date' + hhh) + ' - ' + localStorage.getItem('text' + hhh) + '</p>' + 
                     '<img src="trash.png" alt="remove" onclick="remove(' + hhh + ')" value="text' + hhh + '" id="remove">' +
