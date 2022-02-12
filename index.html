@@ -165,9 +165,7 @@
 
         <div class="content">
             <div class="grad"></div>
-            <div class="sums">
-                <div class="after"></div>
-            </div>
+            <div class="sums"></div>
         </div>
 
         <div class="foot">
@@ -200,7 +198,7 @@
                 code  = localStorage.getItem('code')
                 total = localStorage.getItem('total')
 
-                $('.after').after(code)
+                $('.sums').prepend(code)
                 $('#zp').text('За ' + monthNames[month] + ': ' + total + ' грн')
             }
             
@@ -209,7 +207,7 @@
                 total = localStorage.getItem('total')
                 suma  = $('#text').val()
                 
-                $('.after').after(
+                $('.sums').prepend(
                     '<div class="str" id="div' + num + '">'+ 
                         '<p value="' + suma + '">' + outputDate + ' - ' + suma + '</p>'+ 
                         '<img src="trash.png" onclick="remove(' + num + ')">'+
