@@ -66,7 +66,6 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
-                height: 30px;
             }
 
             .foot p{
@@ -83,30 +82,12 @@
 
             .inp{
                 width: 100%;
-                height: 100%;
+                height: 33px;
                 background: #FFFFFF;
                 border-radius: 20px;
                 border: none;
                 padding-left: 20px;
                 text-decoration: none;
-            }
-            
-            .btn{
-                width: 60px;
-                height: 32px;
-                background: #FFFFFF;
-                border-radius: 20px;
-                border: none;
-                text-transform: uppercase;
-                color: #111;
-                font-family: Raleway;
-                font-style: normal;
-                font-weight: normal;
-                font-size: 14px;
-                line-height: 20px;
-                font-feature-settings: 'pnum' on, 'lnum' on;
-                margin-left: 20px;
-                
             }
 
             .grad{
@@ -155,6 +136,12 @@
                 overflow-y: scroll;
             }
 
+            .foot img{
+                filter: invert(100%);
+                margin-left: 10px;
+                height: 35px;
+            }
+
         </style>
     </head>
 
@@ -171,7 +158,7 @@
         <div class="foot">
             <div>
                 <input class="inp" type="number" value=""   placeholder="ВВЕДИ ЧИСЛО..." id="text">
-                <input class="btn" type="button" value="OK" onclick="addElem()">
+                <img onclick="addElem()" src="https://img.icons8.com/ios-filled/50/000000/send-letter--v1.png"/>
             </div>
             <p id="zp"></p>
         </div>
