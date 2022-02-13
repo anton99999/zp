@@ -105,8 +105,8 @@
             }
             
             .str img{
-                width: 16px;
-                height: 16px;
+                width: 21px;
+                height: 21px;
                 border-radius: 20px;
                 background: #fff;
                 padding: 7px;
@@ -114,8 +114,8 @@
             }
 
             .str p{
-                width: 130px;
-                padding: 7px 0px;
+                width: 160px;
+                padding: 9.5px 0px;
                 text-align: center;
                 border-radius: 20px;
                 background: #fff;
@@ -123,7 +123,7 @@
                 font-family: Raleway;
                 font-style: normal;
                 font-weight: normal;
-                font-size: 14px;
+                font-size: 16px;
                 line-height: 16px;
                 font-feature-settings: 'pnum' on, 'lnum' on;
                 margin: 10px;
@@ -181,7 +181,7 @@
                 localStorage.setItem('total', 0)
             }
 
-            setTimeout(makeElem, 1)
+            makeElem()
 
             function makeElem(){
                 code  = localStorage.getItem('code')
@@ -204,15 +204,19 @@
                 ) 
                 $('#text').val('')
                 $('#div' + num).hide(1).show(1000)
+                
 
                 total = Number(total) + Number($('#div' + num + ' p').attr('value'))
                 $('#zp').text('За ' + monthNames[month] + ': ' + total + ' грн')
 
                 num++
                 
-                localStorage.setItem('num',  num)
-                localStorage.setItem('code', $('.sums').html())
-                localStorage.setItem('total',  total)
+                setTimeout(function(){
+                    localStorage.setItem('num', num)
+                    localStorage.setItem('code', $('.sums').html())
+                    localStorage.setItem('total', total)
+                }, 1)
+                
             }
 
             function remove(index){
