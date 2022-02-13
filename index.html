@@ -179,16 +179,18 @@
         <script>
 
             let num        = localStorage.getItem('num')
+            let total      = 0
             let date       = new Date
             let day        = date.getDate()
             let month      = date.getMonth()
             let year       = date.getFullYear()
             let outputDate = String(day) + '.' + String(month + 1)  + '.' + String(year) 
             let monthNames = ["січень", "лютий", "березень", "квітень", "травень", "червень", "липень", "серпень", "вересень", "жовтень", "листопад", "грудень" ];
-            let total      = 0
+
            
+
             if (num == null){
-                localStorage.setItem('num', 1)
+                localStorage.setItem('num', 0)
                 localStorage.setItem('total', 0)
             }
 
@@ -214,6 +216,7 @@
                     '</div>'
                 ) 
                 $('#text').val('')
+                $('#div' + num).hide(1).show(1000)
 
                 total = Number(total) + Number($('#div' + num + ' p').attr('value'))
                 $('#zp').text('За ' + monthNames[month] + ': ' + total + ' грн')
