@@ -1,85 +1,108 @@
 <!DOCTYPE html>
-    <html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" type="image/icon">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <title>ZARPLATA</title>
+    <style>
+        body{margin: 0px; padding: 0px; display: flex; justify-content: center; background: #000; font-family: Roboto, Arial, Helvetica, sans-serif;}
 
-    <head>
-        <title>ZARPLATA</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel=”shortcut icon” href=”favicon.ico” type=”image/x-icon”>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <style>
-            html, body{
-                font-family: sans-serif;
-                margin: 0;
-                min-height: 100%;
-                display: flex;
-                height: 100%;
-                flex-direction: column;
-            }
+        ::-webkit-scrollbar {
+            width: 0;
+        }
 
-            ::-webkit-scrollbar {
-                width: 0;
-            }
+        .content{
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+        }
 
-            .head{
-                
-                height: 100px;
-                display: flex;
-                justify-content: center;
-                background: #111;
-                border-bottom: 1px #fff solid;
-            }
+        header{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            background: #000;
+        }
 
-            .head p{
-                color: #fff;
-                font-family: Raleway;
-                font-style: normal;
-                font-weight: normal;
-                font-size: 24px;
-                line-height: 28px;
-                display: flex;
-                align-items: center;
-                text-align: center;
-                user-select: none;
-            }
+        header p{
+            color: #fff;
+            font-size: 18px;
+            font-family: Raleway;
+            user-select: none;
+        }
+
+        main{
+            width: 100%;
+            flex: 1;
+            border-top: 1px #fff solid;
+            border-bottom: 1px #fff solid;
+            background: #000;
+            overflow: scroll;
+            padding-bottom: 10px;
+        }
+
+        footer{
+            height: 160px;
+            background: #000;
+            padding: 20px;
+        }
+
+        .grad{
+            position: fixed;
+            width: 600px;
+            height: 100px;
+            pointer-events: none;
+            background: linear-gradient(180deg, #111111 0%, rgba(17, 17, 17, 0) 100%);
+        }
+
+        .sums{
+            display: flex;
+            flex-direction: column-reverse;
+            height: 100%;
+            overflow-y: scroll;
+        }
+
+        footer img{
+            filter: invert(100%);
+            margin-left: 10px;
+            height: 35px;
+        }
+
+        .str{
+            display: flex;
+            flex-direction: row;
+            margin-left: 20px;
+        }
             
-            .content{
-                display: flex;
-                background: #111;
-                overflow-y:scroll;
-                flex-direction: column;
-                padding-bottom: 10px;
-                flex: 1 1 auto;
-            }
+        .str img{
+            width: 21px;
+            height: 21px;
+            border-radius: 20px;
+            background: #fff;
+            padding: 7px;
+            margin: auto 0;
+        }
 
-            .foot{
-                
-                height: 150px;
-                border-top: 1px #fff solid;
-                display: flex;
-                background: #111;
-                flex-direction: column;
-                padding: 20px;
-                
-            }
-
-            .foot div{
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-            }
-
-            .foot p{
-                text-transform: uppercase;
-                color: #fff;
-                font-family: Raleway;
-                font-style: normal;
-                font-weight: normal;
-                font-size: 18px;
-                line-height: 20px;
-                font-feature-settings: 'pnum' on, 'lnum' on;
-
-            }
+        .str p{
+            width: 160px;
+            padding: 9.5px 0px;
+            text-align: center;
+            border-radius: 20px;
+            background: #fff;
+            color: #111;
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 16px;
+            font-feature-settings: 'pnum' on, 'lnum' on;
+            margin: 10px;
+        }
 
             .inp{
                 width: 100%;
@@ -91,156 +114,131 @@
                 text-decoration: none;
             }
 
-            .grad{
-                position: fixed;
-                width: 100%;
-                height: 100px;
-                pointer-events: none;
-                background: linear-gradient(180deg, #111111 0%, rgba(17, 17, 17, 0) 100%);
-            }
 
-            .str{
+
+            footer div{
                 display: flex;
                 flex-direction: row;
-                margin-left: 20px;
-            }
-            
-            .str img{
-                width: 21px;
-                height: 21px;
-                border-radius: 20px;
-                background: #fff;
-                padding: 7px;
-                margin: auto 0;
+                justify-content: center;
             }
 
-            .str p{
-                width: 160px;
-                padding: 9.5px 0px;
-                text-align: center;
-                border-radius: 20px;
-                background: #fff;
-                color: #111;
+            footer p{
+                text-transform: uppercase;
+                color: #fff;
                 font-family: Raleway;
                 font-style: normal;
                 font-weight: normal;
-                font-size: 16px;
-                line-height: 16px;
+                font-size: 18px;
+                line-height: 20px;
                 font-feature-settings: 'pnum' on, 'lnum' on;
-                margin: 10px;
+
             }
 
-            .sums{
-                display: flex;
-                flex-direction: column-reverse;
-                height: 100%;
-                overflow-y: scroll;
+            @media (min-width: 599px) {
+            .content{
+                max-width: 600px;
+                border-left: 1px #fff solid;
+                border-right: 1px #fff solid;
             }
+        }
 
-            .foot img{
-                filter: invert(100%);
-                margin-left: 10px;
-                height: 35px;
-            }
-
-        </style>
-    </head>
-
-    <body>
-        <div class="head">
+    </style>
+</head>
+<body>
+    <div class="content">
+        <header>
             <p onclick="clearAll()">ZARPLATA</p>
-        </div>
-
-        <div class="content">
+        </header>
+        <main>
             <div class="grad"></div>
             <div class="sums"></div>
-        </div>
-
-        <div class="foot">
+        </main>
+        <footer>
             <div>
-                <input class="inp" type="number" value=""   placeholder="ВВЕДИ ЧИСЛО..." id="text">
-                <img onclick="addElem()" src="https://img.icons8.com/ios-filled/50/000000/send-letter--v1.png"/>
+                <input class="inp" type="number" value="" placeholder="ВВЕДИ ЧИСЛО..." id="text">
+                <img src="https://img.icons8.com/ios-filled/50/000000/send-letter--v1.png">
             </div>
-            <p id="zp"></p>
-        </div>
+            <p id="zp">За лютий: null грн</p>
+        </footer>
+    </div>
 
-        <script>
 
-            let num        = localStorage.getItem('num')
-            let total      = 0
-            let date       = new Date
-            let day        = date.getDate()
-            let month      = date.getMonth()
-            let year       = date.getFullYear()
-            let outputDate = String(day) + '.' + String(month + 1)  + '.' + String(year) 
-            let monthNames = ["січень", "лютий", "березень", "квітень", "травень", "червень", "липень", "серпень", "вересень", "жовтень", "листопад", "грудень" ];
+    <script>
 
-           
+        let num        = localStorage.getItem('num')
+        let total      = 0
+        let date       = new Date
+        let day        = date.getDate()
+        let month      = date.getMonth()
+        let year       = date.getFullYear()
+        let outputDate = String(day) + '.' + String(month + 1)  + '.' + String(year) 
+        let monthNames = ["січень", "лютий", "березень", "квітень", "травень", "червень", "липень", "серпень", "вересень", "жовтень", "листопад", "грудень" ];
 
-            if (num == null){
-                localStorage.setItem('num', 0)
-                localStorage.setItem('total', 0)
-            }
-
-            makeElem()
-
-            function makeElem(){
-                code  = localStorage.getItem('code')
-                total = localStorage.getItem('total')
-
-                $('.sums').prepend(code)
-                $('#zp').text('За ' + monthNames[month] + ': ' + total + ' грн')
-            }
-            
-            function addElem(){
-                num   = localStorage.getItem('num')
-                total = localStorage.getItem('total')
-                suma  = $('#text').val()
-                
-                $('.sums').prepend(
-                    '<div class="str" id="div' + num + '">'+ 
-                        '<p value="' + suma + '">' + outputDate + ' - ' + suma + '</p>'+ 
-                        '<img src="trash.png" onclick="remove(' + num + ')">'+
-                    '</div>'
-                ) 
-                $('#text').val('')
-                $('#div' + num).hide(1).show(1000)
-                
-
-                total = Number(total) + Number($('#div' + num + ' p').attr('value'))
-                $('#zp').text('За ' + monthNames[month] + ': ' + total + ' грн')
-
-                num++
-                
-                setTimeout(function(){
-                    localStorage.setItem('num', num)
-                    localStorage.setItem('code', $('.sums').html())
-                    localStorage.setItem('total', total)
-                }, 1)
-                
-            }
-
-            function remove(index){
        
-                $('#div' + index).hide(1000)
 
-                setTimeout(function() { 
-                    $('#div' + index).remove() 
-                    localStorage.setItem('code', $('.sums').html())
-                }, 1000)
+        if (num == null){
+            localStorage.setItem('num', 0)
+            localStorage.setItem('total', 0)
+        }
 
-                total = Number(total) - Number($('#div' + index + ' p').attr('value'))
+        makeElem()
 
-                $('#zp').text('За ' + monthNames[month] + ': ' + total + ' грн')
+        function makeElem(){
+            code  = localStorage.getItem('code')
+            total = localStorage.getItem('total')
 
-                localStorage.setItem('total', total)                
-            }
+            $('.sums').prepend(code)
+            $('#zp').text('За ' + monthNames[month] + ': ' + total + ' грн')
+        }
+        
+        $('footer div img').click(function(){
+            num   = localStorage.getItem('num')
+            total = localStorage.getItem('total')
+            suma  = $('#text').val()
+            
+            $('.sums').prepend(
+                '<div class="str" id="div' + num + '">'+ 
+                    '<p value="' + suma + '">' + outputDate + ' - ' + suma + '</p>'+ 
+                    '<img src="trash.png" onclick="remove(' + num + ')">'+
+                '</div>'
+            ) 
+            $('#text').val('')
+            $('#div' + num).hide(1).show(1000)
+            
 
-            function clearAll(){
-                 localStorage.clear()
-            }
+            total = Number(total) + Number($('#div' + num + ' p').attr('value'))
+            $('#zp').text('За ' + monthNames[month] + ': ' + total + ' грн')
 
-        </script>
+            num++
+            
+            setTimeout(function(){
+                localStorage.setItem('num', num)
+                localStorage.setItem('code', $('.sums').html())
+                localStorage.setItem('total', total)
+            }, 1003)
+            
+        })
 
-    </body>
+        function remove(index){
+   
+            $('#div' + index).hide(1000)
+
+            total = Number(total) - Number($('#div' + index + ' p').attr('value'))
+
+            $('#zp').text('За ' + monthNames[month] + ': ' + total + ' грн')
+
+            localStorage.setItem('total', total)  
+            
+            setTimeout(function() { 
+                $('#div' + index).remove() 
+                localStorage.setItem('code', $('.sums').html())
+            }, 1000)              
+        }
+
+        function clearAll(){
+             localStorage.clear()
+        }
+
+    </script>
+</body>
 </html>
