@@ -1,6 +1,6 @@
 {
   "background_color": "#000000",
-  "description": "You salary",
+  "description": "Your salary",
   "dir": "ltr",
   "display": "standalone",
   "name": "ZARPLATA",
@@ -17,18 +17,5 @@
       "type": "image/x-icon"
     }
   ],
-  "shortcuts": [],
-  "опис": "",
-  "дисплей": "окремий",
-  "орієнтація": "будь-яка",
-  "область": "/",
-  "категорії": [],
-  "скріншоти": [],
-  "значки": [
-    {
-      "src": "favicon.ico",
-      "type": "image/x-icon"
-    }
-  ],
-  "ярлики": []
+  "shortcuts": []
 }
