@@ -59,7 +59,7 @@
             width: 600px;
             height: 100px;
             pointer-events: none;
-            background: linear-gradient(180deg, #111111 0%, rgba(17, 17, 17, 0) 100%);
+            background: linear-gradient(360deg, #000 100%, #000 0%);
         }
 
         .sums{
@@ -182,7 +182,34 @@
 
        
         
-        window.scrollTo(0, 1);
+        $('#text').keypress(function(e) {
+            if (e.keyCode == 13) {
+                num   = localStorage.getItem('num')
+                total = localStorage.getItem('total')
+                suma  = $('#text').val()
+                
+                $('.sums').prepend(
+                    '<div class="str" id="div' + num + '">'+ 
+                        '<p value="' + suma + '">' + outputDate + ' - ' + suma + '</p>'+ 
+                        '<img src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/000000/external-trash-user-interface-kmg-design-detailed-outline-kmg-design.png" onclick="remove(' + num + ')">'+
+                    '</div>'
+                ) 
+                $('#text').val('')
+                $('#div' + num).hide(1).show(1000)
+                
+
+                total = Number(total) + Number($('#div' + num + ' p').attr('value'))
+                $('#zp').text('За ' + monthNames[month] + ': ' + total + ' грн')
+
+                num++
+                
+                setTimeout(function(){
+                    localStorage.setItem('num', num)
+                    localStorage.setItem('code', $('.sums').html())
+                    localStorage.setItem('total', total)
+                }, 1003)
+            }
+        });
 
         if (num == null){
             localStorage.setItem('num', 0)
