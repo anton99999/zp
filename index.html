@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <title>ZARPLATA</title>
-    <style>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<title>ZARPLATA</title>
+<style>
+    
+    
         body{margin: 0px; padding: 0px; display: flex; justify-content: center; background: #000; font-family: Roboto, Arial, Helvetica, sans-serif;}
 
         ::-webkit-scrollbar {
@@ -141,10 +143,14 @@
                 border-right: 1px #fff solid;
             }
         }
+    
+    
 
-    </style>
+</style>
 </head>
 <body>
+    
+    
     <div class="content">
         <header>
             <p onclick="clearAll()">ZARPLATA</p>
@@ -175,6 +181,8 @@
         let monthNames = ["січень", "лютий", "березень", "квітень", "травень", "червень", "липень", "серпень", "вересень", "жовтень", "листопад", "грудень" ];
 
        
+        
+        window.scrollTo(0, 1);
 
         if (num == null){
             localStorage.setItem('num', 0)
@@ -199,7 +207,7 @@
             $('.sums').prepend(
                 '<div class="str" id="div' + num + '">'+ 
                     '<p value="' + suma + '">' + outputDate + ' - ' + suma + '</p>'+ 
-                    '<img src="trash.png" onclick="remove(' + num + ')">'+
+                    '<img src="<img src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/000000/external-trash-user-interface-kmg-design-detailed-outline-kmg-design.png"/>" onclick="remove(' + num + ')">'+
                 '</div>'
             ) 
             $('#text').val('')
