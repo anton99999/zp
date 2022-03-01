@@ -1,13 +1,13 @@
 {
   "background_color": "#000000",
-  "description": "Your salary",
+  "description": "you salary ",
   "dir": "ltr",
   "display": "standalone",
-  "name": "ZARPLATA",
+  "name": "zp",
   "orientation": "portrait",
-  "scope": "/",
-  "short_name": "ZARPLATA",
-  "start_url": "https://anton99999.github.io/zp",
+  "scope": "https://jquery.com/",
+  "short_name": "zp",
+  "start_url": "/index.html",
   "theme_color": "#000000",
   "categories": [],
   "screenshots": [],
@@ -17,5 +17,8 @@
       "type": "image/x-icon"
     }
   ],
-  "shortcuts": []
+  "shortcuts": [],
+  "опис": "",
+  "ярлики": [],
+  "дисплей": "окремий"
 }
