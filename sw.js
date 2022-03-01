@@ -1,2 +1,44 @@
-if(!self.define){let e,i={};const r=(r,s)=>(r=new URL(r+".js",s).href,i[r]||new Promise((i=>{if("document"in self){const e=document.createElement("script");e.src=r,e.onload=i,document.head.appendChild(e)}else e=r,importScripts(r),i()})).then((()=>{let e=i[r];if(!e)throw new Error(`Module ${r} didn’t register its module`);return e})));self.define=(s,c)=>{const n=e||("document"in self?document.currentScript.src:"")||location.href;if(i[n])return;let o={};const t=e=>r(e,n),f={module:{uri:n},exports:o,require:t};i[n]=Promise.all(s.map((e=>f[e]||t(e)))).then((e=>(c(...e),o)))}}define(["./workbox-6ae932a1"],(function(e){"use strict";self.addEventListener("message",(e=>{e.data&&"SKIP_WAITING"===e.data.type&&self.skipWaiting()})),e.precacheAndRoute([{url:"favicon.ico",revision:"8c13f3041980d6411a3ce53cd4cf74dc"},{url:"index.html",revision:"8f407aafb61530dcb6f2728a576efcf5"},{url:"manifest.json",revision:"21eb98be350b13b30475f26ed58db994"},{url:"pwabuilder-sw-register.js",revision:"c64bea836057c59b82d55f2379ccf749"},{url:"pwabuilder-sw.js",revision:"942b4fe8eceb6246b2879398b75732ce"},{url:"README.md",revision:"890180938fb4ce6b299027c41367137d"}],{ignoreURLParametersMatching:[/^utm_/,/^fbclid$/,/^s/]})}));
-//# sourceMappingURL=sw.js.map
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+
+const CACHE = "pwabuilder-page";
+
+const offlineFallbackPage = "ToDo-replace-this-name.html";
+
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
+self.addEventListener('install', async (event) => {
+  event.waitUntil(
+    caches.open(CACHE)
+      .then((cache) => cache.add(offlineFallbackPage))
+  );
+});
+
+if (workbox.navigationPreload.isSupported()) {
+  workbox.navigationPreload.enable();
+}
+
+self.addEventListener('fetch', (event) => {
+  if (event.request.mode === 'navigate') {
+    event.respondWith((async () => {
+      try {
+        const preloadResp = await event.preloadResponse;
+
+        if (preloadResp) {
+          return preloadResp;
+        }
+
+        const networkResp = await fetch(event.request);
+        return networkResp;
+      } catch (error) {
+
+        const cache = await caches.open(CACHE);
+        const cachedResp = await cache.match(offlineFallbackPage);
+        return cachedResp;
+      }
+    })());
+  }
+});
