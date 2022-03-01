@@ -12,6 +12,13 @@
     const el = document.createElement('pwa-update');
     document.body.appendChild(el);
 </script>
+<script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('pwabuilder-sw\pwabuilder-sw.js');
+      });
+    }
+    </script>
 <script src="pwabuilder-sw\pwabuilder-sw.js"></script>
 <script src="pwabuilder-sw\pwabuilder-sw-register.js"></script>
 <title>ZARPLATA</title>
