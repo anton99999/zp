@@ -2,7 +2,7 @@
   "background_color": "#000000",
   "description": "you salary ",
   "dir": "ltr",
-  "display": "standalone",
+  "display": "fullscreen",
   "name": "ZARPLATA",
   "orientation": "portrait",
   "scope": "https://jquery.com/",
