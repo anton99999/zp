@@ -3,10 +3,10 @@
   "description": "you salary ",
   "dir": "ltr",
   "display": "standalone",
-  "name": "zp",
+  "name": "ZARPLATA",
   "orientation": "portrait",
   "scope": "https://jquery.com/",
-  "short_name": "zp",
+  "short_name": "ZARPLATA",
   "start_url": "index.html",
   "theme_color": "#000000",
   "icons": [
